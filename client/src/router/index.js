@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import adminPanelRoutes from './adminRoutes';
+import clientPanelRoutes from './clientRoutes';
 import axios from "../axios";
 import { store } from "../store";
 
@@ -21,7 +23,9 @@ const router = createRouter({
       path: "/register",
       name: "register",
       component: () => import("../views/SignUp.vue"),
-    },
+    },    
+    { ...adminPanelRoutes },
+    { ...clientPanelRoutes },
   ],
 });
 
