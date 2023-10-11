@@ -2,6 +2,7 @@ require('dotenv').config();
 // sync-database.js
 const sequelize = require('./db');
 const User = require('./schemas/User');
+const Program = require('./schemas/Program');
 
 async function syncDatabase() {
   try {

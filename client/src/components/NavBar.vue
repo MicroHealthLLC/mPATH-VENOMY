@@ -85,7 +85,7 @@ const logout = async () => {
   text-decoration: none;
 }
 .header {
-    margin-bottom: 6rem;
+    padding-bottom: 6rem;
 }
 
 /* * {

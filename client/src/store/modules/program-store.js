@@ -1,5 +1,8 @@
 const programStore = {
-    state: () => ({}),
+    state: () => ({
+        
+
+    }),
     actions: {},
     mutations: {},
     getters: {},

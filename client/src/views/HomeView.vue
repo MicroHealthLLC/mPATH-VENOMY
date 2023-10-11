@@ -1,8 +1,18 @@
 <script>
+import SvgIcon from '@jamescoyle/vue-icon';
+import { mdiAccountGroup } from '@mdi/js';
+
 export default {
+  components: {
+    SvgIcon
+  },
   data() {
     return {
+      path: mdiAccountGroup,
       numEmployees: 10,
+      programs: ['Training Site', 'Growth Strategy', 'Back Office', 'Program 4', 'Program 5', 'Program 6'],
+      actions: ['TASKS', 'ISSUES', 'RISKS', 'LESONS'],
+      colors: ['success', 'warning','error', 'info', ]
     };
   },
   methods: {
@@ -18,49 +28,111 @@ export default {
 </script>
 
 <template>
-  <div class="text-center mt-5">
-        <h4 >Welcome to</h4>
-        <img alt="Microhealth logo" class="logo mx-auto" src="@/assets/images/mpath.svg" width="250"/>      
-        
+  <div class="text-center mt-5 bt">
+      <h4 >Welcome to</h4>
+      <img alt="Microhealth logo" class="logo mx-auto" src="@/assets/images/mpath.svg" width="250"/>      
+      
     <div class="text-center mt-5">
-    <v-item-group selected-class="bg-primary">
-    <v-container>
-      <v-row>
-        <v-col
-          v-for="n in 6"
-          :key="n"
-          cols="12"
-          md="4"
-        >
-          <v-item v-slot="{ isSelected, selectedClass, toggle }">
-          <RouterLink
-          class="link mr-3"        
-          :to="`/program/${n}`"
+      <v-item-group selected-class="bg-primary">
+      <v-container>
+        <v-row>
+          <v-col
+            v-for="n, i in programs"
+            :key="i"
+            cols="12"
+            md="4"
           >
-            <v-card
+          <v-item v-slot="{ isSelected, selectedClass, toggle }">
+            <RouterLink
+              class="link mr-3"        
+              :to="`/program/${i}`"
+              >
+             <v-card
               :class="['d-flex align-center', selectedClass]"
               dark
-              height="200"  
+              height="300"  
               @click="toggle"   
-            >
-              <div
-                class="text-h3 flex-grow-1 text-center"
-              >
-                {{ isSelected ? 'Selected' : 'Program' + n }}
-              </div>
-            </v-card>
-          </RouterLink> 
-          </v-item>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-item-group>
-  </div>
-    </div>
+            >    
+              <v-container>
+              <v-row no-gutters>
+              <v-col>
+                <v-sheet class="">
+                  <div
+                      class="text-h5 flex-grow-1 pb-3 text-left text-info"
+                        >
+                        {{ isSelected ? 'Selected' : n }}
+                      </div>
+                </v-sheet>
+              </v-col>
+              <v-divider class="pa-3"></v-divider>       
+              <hr/>
+              </v-row>
+              <v-row no-gutters class="text-bold">
+                <v-col>
+                  <v-sheet class="text-left text-dark">
+                  Actions
+                  </v-sheet>
+                </v-col>
+                <v-col >
+                  <v-sheet class="text-left pl-3">
+                #
+                  </v-sheet>
+                </v-col>
+                <v-col>
+                  <v-sheet class="text-left">
+                  Progress
+                  </v-sheet>
+                </v-col>
+              </v-row>
+              <v-row no-gutters v-for="n, i in actions" :key="i">
+                <v-col cols="2" >
+                  <v-sheet class="text-left">
+                  {{ n  }}
+                  </v-sheet>
+                </v-col>
+                <v-col>
+                <v-badge 
+                    :color="colors[i]"
+                    content="12"
+                    inline        
+                  ></v-badge>
+                </v-col>
+                <v-col>
+                  <!-- Progress -->
+                  <v-sheet class="pa-3">
+                    <v-progress-linear
+                    model-value="90"
+                    :color="colors[i]"
+                    rounded
+              ></v-progress-linear>
+                  </v-sheet>
+                </v-col>  
+              </v-row>
+              <v-card-actions>
+                <v-list-item class="w-100">
 
-  <!-- <main>
-    <h1>Welcome {{ store?.username || 'Comrade' }}</h1>
-  </main> -->
+                
+                  <template v-slot:append>
+                    <div class="justify-self-end">     
+                      <v-icon class="me-1" icon="mdi-heart"></v-icon>
+                      <span class="subheading me-2">256</span>
+                      <span class="me-1">·</span>
+                      <v-icon class="me-1" icon="mdi-share-variant"></v-icon>
+                      <span class="subheading">45</span>
+                    </div>
+                  </template>
+                </v-list-item>
+              </v-card-actions>
+              </v-container>
+             </v-card>
+            </RouterLink> 
+          </v-item>
+          </v-col>
+        </v-row>        
+      </v-container>
+    </v-item-group>
+    </div>
+  </div>
 </template>
 <style>
 h4 {
@@ -69,5 +141,11 @@ h4 {
   font-weight: 400;
   margin-right: 5%;
   margin-bottom: -1.8%;
+}
+.bt {
+  background-color: rgb(239, 242, 243);
+}
+.text-bold{
+  font-weight: bold;
 }
 </style>
