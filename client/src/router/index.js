@@ -32,6 +32,8 @@ const router = createRouter({
 router.beforeEach(async (to, from) => {
   try {
     const authenticated = await is_authenticated();
+    const users = await fetchAllUsers();    
+    console.log(users); // Log the users data
     if (to.meta.requiresAuth && !authenticated) {
       // User is not authenticated, redirect to login
       return { path: "/login" };
@@ -52,6 +54,17 @@ async function is_authenticated() {
     return true;
   } catch (err) {
     return false;
+  }
+}
+
+async function fetchAllUsers() {
+  try {
+    const response = await axios.get("users/");
+    // console.log(response.data);
+    return response.data;
+  } catch (err) {
+    console.error("Error fetching users:", err);
+    return [];
   }
 }
 

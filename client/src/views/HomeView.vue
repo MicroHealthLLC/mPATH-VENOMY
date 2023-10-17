@@ -114,11 +114,12 @@ export default {
                 
                   <template v-slot:append>
                     <div class="justify-self-end">     
-                      <v-icon class="me-1" icon="mdi-heart"></v-icon>
-                      <span class="subheading me-2">256</span>
-                      <span class="me-1">·</span>
-                      <v-icon class="me-1" icon="mdi-share-variant"></v-icon>
-                      <span class="subheading">45</span>
+                      <i class="fa-regular fa-users mr-1"></i>
+                      <span class="subheading mr-4">256</span>           
+                      <i class="fa-regular fa-suitcase mr-1"></i>
+                      <span class="subheading mr-4">45</span>
+                      <i class="fa-regular fa-file-invoice mr-1"></i>
+                      <span class="subheading">12</span>
                     </div>
                   </template>
                 </v-list-item>
