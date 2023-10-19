@@ -1,6 +1,8 @@
 <script>
+import { mapActions, mapGetters } from "vuex";
 import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiAccountGroup } from '@mdi/js';
+// import { mapActions, mapGetters, mapMutations } from "vuex";
 
 export default {
   components: {
@@ -10,12 +12,17 @@ export default {
     return {
       path: mdiAccountGroup,
       numEmployees: 10,
-      programs: ['Training Site', 'Growth Strategy', 'Back Office', 'Program 4', 'Program 5', 'Program 6'],
       actions: ['TASKS', 'ISSUES', 'RISKS', 'LESONS'],
       colors: ['success', 'warning','error', 'info', ]
     };
   },
+  mounted() {   
+    this.fetchPrograms()
+  },
   methods: {
+    ...mapActions([
+      "fetchPrograms",
+    ]),
     addEmployees() {
       this.numEmployees++;
     },
@@ -23,6 +30,12 @@ export default {
       this.numEmployees--;
     },
   },
+  computed: {
+      ...mapGetters([
+      "programsStatus", 
+      "getPrograms",
+    ]),      
+    },
 };
 
 </script>
@@ -37,7 +50,7 @@ export default {
       <v-container>
         <v-row>
           <v-col
-            v-for="n, i in programs"
+            v-for="item, i in getPrograms"
             :key="i"
             cols="12"
             md="4"
@@ -60,7 +73,7 @@ export default {
                   <div
                       class="text-h5 flex-grow-1 pb-3 text-left text-info"
                         >
-                        {{ isSelected ? 'Selected' : n }}
+                        {{ isSelected ? 'Selected' : item.name }}
                       </div>
                 </v-sheet>
               </v-col>
@@ -114,11 +127,12 @@ export default {
                 
                   <template v-slot:append>
                     <div class="justify-self-end">     
-                      <v-icon class="me-1" icon="mdi-heart"></v-icon>
-                      <span class="subheading me-2">256</span>
-                      <span class="me-1">·</span>
-                      <v-icon class="me-1" icon="mdi-share-variant"></v-icon>
-                      <span class="subheading">45</span>
+                      <i class="fa-regular fa-users mr-1"></i>
+                      <span class="subheading mr-4">256</span>           
+                      <i class="fa-regular fa-suitcase mr-1"></i>
+                      <span class="subheading mr-4">45</span>
+                      <i class="fa-regular fa-file-invoice mr-1"></i>
+                      <span class="subheading">12</span>
                     </div>
                   </template>
                 </v-list-item>
