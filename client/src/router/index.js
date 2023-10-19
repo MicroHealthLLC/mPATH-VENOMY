@@ -32,7 +32,8 @@ const router = createRouter({
 router.beforeEach(async (to, from) => {
   try {
     const authenticated = await is_authenticated();
-    const users = await fetchAllUsers();    
+    const users = await fetchAllUsers();  
+    // const programs = await fetchAllPrograms();  
     console.log(users); // Log the users data
     if (to.meta.requiresAuth && !authenticated) {
       // User is not authenticated, redirect to login
@@ -67,5 +68,6 @@ async function fetchAllUsers() {
     return [];
   }
 }
+
 
 export default router;

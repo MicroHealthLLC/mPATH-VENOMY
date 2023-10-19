@@ -1,128 +1,134 @@
-<script setup>
-// import { useRouter } from "vue-router";
-// import { useStore } from "vuex";
-
+<script>
+import { mapActions, mapGetters, mapMutations } from "vuex";
+  export default {
+    data: () => ({
+      valid: false,
+      description: '',
+      program: {
+        name: '',
+        description: ''
+      },
+     }),
+    mounted() {
+     console.log(this.program)
+     this.fetchPrograms()
+    },
+    methods: {
+      ...mapActions([
+      "createProgram", 
+      "fetchPrograms",
+      "deleteProgram",
+      "deleteAllPrograms"
+    ]),
+    ...mapMutations([
+      "SET_PROGRAM_STATUS"
+    ]),
+    removeProgram(id) {
+      this.deleteProgram(id);
+    },
+    removeAllPrograms() {
+      this.deleteAllPrograms();
+    },
+    saveProgram() {
+        let program = {
+          name: this.program.name,
+          description: this.program.description
+        }   
+      this.createProgram(program)
+      setTimeout(() => {
+          this.$refs.form.reset();
+        }, 1500);
+      },      
+    },
+    computed: {
+      ...mapGetters([
+      "programsStatus", 
+      "getPrograms",
+    ]),      
+    },
+    watch : {
+      programsStatus: {
+      handler() {
+        if (this.programsStatus == 200) {
+          alert("Program action successful")
+          this.SET_PROGRAM_STATUS(0);
+          this.fetchPrograms();
+        }
+      },
+    },
+    }
+  }
 </script>
 <template>
   <div class="container">
-   <!-- TO DO:  Add form here to save test program data -->
+    <v-form v-model="valid" ref="form">
+    <v-container>
+      <v-row>
+        <v-col
+          cols="12"
+          md="4"
+        >
+          <v-text-field
+            v-model="program.name"     
+            label="Program Name"
+            required
+            hide-details
+            variant="outlined"
+          ></v-text-field>
+        </v-col>
+
+        <v-col
+          cols="12"
+          md="4"
+        >
+        <v-textarea 
+          label="Description"   
+          v-model="program.description" 
+          variant="outlined">
+        </v-textarea>     
+        </v-col>
+
+       <v-btn type="button" color="success"  class="mr-3" @click="saveProgram">Save</v-btn>
+       <v-btn type="button" color="error" @click="removeAllPrograms">DESTROY ALL</v-btn>
+      </v-row>
+
+    </v-container>
+  </v-form>
+  <!-- <span v-if="getPrograms && getPrograms.length > 0">
+    {{ getPrograms  }}
+  </span> -->
+  <v-table >
+    <thead>
+      <tr>
+        <th class="text-left">
+          Name
+        </th>
+        <th class="text-left">
+         Description
+        </th>
+      </tr>
+    </thead>
+    <tbody v-if="getPrograms && getPrograms.length > 0">
+        <tr v-for="item in getPrograms" :key="item.name">
+          <td class="text-left">{{ item.name }}</td>
+          <td class="text-left">{{ item.description }}</td>
+          <td class="text-left">
+            <v-btn color="error" @click="removeProgram(item.id)">
+              Delete
+            </v-btn>
+          </td>
+        </tr>
+      </tbody>
+    <tbody v-else>
+      <tr>
+        <td colspan="2"></td>
+       
+      </tr>
+    </tbody>
+  </v-table>
   </div>
 </template>
 
 <style scoped>
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background-color:   white;
-}
 
-.card {
-  background-color: #f7f7f7; 
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2.5px 5px rgba(56, 56, 56, 0.19),
-      0 3px 3px rgba(56, 56, 56, 0.23);
-  position: relative;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.title {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-.input-group {
-  width: 100%;
-  margin-bottom: 15px;
-  position: relative;
-}
-
-.password-toggle {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  color: #93c5fd;
-}
-
-.password-toggle:hover {
-  cursor: pointer;
-}
-
-.input-label {
-  font-size: 16px;
-}
-
-.input-field {
-  box-sizing: border-box;
-  width: 100%;
-  height: 40px;
-  border: 1px solid #93c5fd;
-  border-radius: 4px;
-  font-size: 16px;
-  padding: 5px;
-}
-
-.input-field:focus {
-  outline: currentColor;
-}
-
-.auth-button {
-  width: 100%;
-  height: 40px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.auth-button:hover {
-  background-color: #0056b3;
-}
-
-.auth-link {
-  font-size: 16px;
-  margin-top: 15px;
-}
-
-.auth-link a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-.auth-link a:hover {
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.error {
-  position: absolute;
-  color: #f29191;
-  top: 0;
-  top: 0;
-  right: 10px;
-  font-size: 15px;
-  margin: 0;
-}
-
-.Gerror {
-  position: absolute;
-  color: #f29191;
-  margin: 0;
-  top: 5px;
-  right: 5px;
-  font-size: 17px;
-}
-
-.inpError {
-  border: 1px solid #ffcccc;
-}
 </style>

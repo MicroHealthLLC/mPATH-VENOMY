@@ -1,9 +1,11 @@
 <script>
 import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiAccountGroup } from '@mdi/js';
+import TestForm from '@/components/TestForm.vue';
 export default { 
   components: {
-    SvgIcon
+    SvgIcon, 
+    TestForm
   },
   data() {
     return {
@@ -17,6 +19,7 @@ export default {
   <div class="text-center mt-3">
     <v-app>
       <h4 class="text-left">Welcome to the Client Panel</h4>    
+      <test-form/>
     <div class="container">
         <router-view />
     </div>
