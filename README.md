@@ -8,7 +8,7 @@ Under construction:  This repo is currently being built with the VueExpressNodeM
 
 
 # Installation Steps
-1. Git clone this link with to your local machine https://github.com/MicroHealthLLC/mPATH-VENOMY.git
+1. Git clone this link to your local machine https://github.com/MicroHealthLLC/mPATH-VENOMY.git
 2. cd to mPATH-VENOMY/server directory
 3. Run npm i to install back-end dependencies
 4. Create a .env file in the root of the server directory with the values below
