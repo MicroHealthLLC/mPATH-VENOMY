@@ -8,14 +8,14 @@ Under construction:  This repo is currently being built with the VueExpressNodeM
 
 
 # Installation Steps
-1. Git clone this link to your local machine https://github.com/MicroHealthLLC/mPATH-VENOMY.git
-2. cd to mPATH-VENOMY/server directory
-3. Run npm i to install back-end dependencies
+1. Git clone this link to your local machine **https://github.com/MicroHealthLLC/mPATH-VENOMY.git**
+2. cd to **mPATH-VENOMY/server** directory
+3. Run _npm i_ to install back-end dependencies
 4. Create a .env file in the root of the server directory with the values below
-5. Run npm run dev to startup the server and the database
-6. Open an additional terminal and cd to client directory
-7. Run npm i to install front-end dependencies.
-8. Run npm run dev in client diretory to start up the app - your terminal should start up on port localhost:5173.
+5. Run _npm run dev_ to startup the server and the database
+6. Open an additional terminal and cd to **client** directory
+7. Run _npm i_ to install front-end dependencies.
+8. Run _npm run dev_ in client diretory to start up the app - your terminal should start up on port localhost:5173.
 
 
 # Values for the server .env file:
