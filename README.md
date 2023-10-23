@@ -3,6 +3,7 @@ Under construction:  This repo is currently being built with the VueExpressNodeM
 
 # Requirements
 - NodeJS 16x or above
+- Vue 3
 - mySQL database
 - .env file with the values of your own database (not the example values given below)
 
