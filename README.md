@@ -19,7 +19,7 @@ Run npm run dev in client diretory to start up the app - your terminal should st
 
 
 Values for the server .env file:
-
+```
 DB_NAME=you-db-name
 DB_USER=username
 DB_PASSWORD=password
@@ -27,3 +27,4 @@ DB_HOST=127.0.0.1
 DB_PORT=3306
 PORT=3000
 JWT_SECRET_KEY='you-jwt-secret-key'
+```
