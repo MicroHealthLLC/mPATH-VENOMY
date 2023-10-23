@@ -18,7 +18,7 @@ Under construction:  This repo is currently being built with the VueExpressNodeM
 8. Run npm run dev in client diretory to start up the app - your terminal should start up on port localhost:5173.
 
 
-Values for the server .env file:
+# Values for the server .env file:
 ```
 DB_NAME=you-db-name
 DB_USER=username
